@@ -1,0 +1,274 @@
+openapi: 3.0.1
+info:
+  version: 0.0.1
+  title: Guide my Steps apis
+  description: api used to obtain geo data and steps from the service
+servers:
+  - url: https://guide-my-steps-stg.api.guide.com
+tags:
+  - name: routing
+    description: apis that interact with route
+paths:
+  /guide-my-steps/route/:
+    post:
+      summary: retrieves route using specified parameters
+      description: >-
+        gets the steps using specified parameter.
+      operationId: 'getRoute'
+      requestBody:
+        description: filter detail to retrieve the orders
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routesRequest'
+      responses:
+        '200':
+          description: successful query. Results may follow
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/routesResponse'
+  /guide-my-steps/user/register:
+    post:
+      summary: retrieves
+      description: >-
+        create the user using specified parameter.
+      operationId: 'userRegister'
+      requestBody:
+        description: filter detail to retrieve the orders
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userRequest'
+      responses:
+        '200':
+          description: successful query. Results may follow
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userRequest'
+  /guide-my-steps/user/update:
+    post:
+      summary: retrieves
+      description: >-
+        create the user using specified parameter.
+      operationId: 'userUpdate'
+      requestBody:
+        description: filter detail to retrieve the orders
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userRequest'
+      responses:
+        '200':
+          description: successful query. Results may follow
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userRequest'
+#        '400':
+#          description: bad request. Additional information enclosed
+#          content:
+#            application/json:
+#              schema:
+#                $ref: 'commonGlossary.yaml#/components/schemas/errorResponse'
+#        '401':
+#          description: unauthorized. the customer does not have privileges to perform this operation
+#          content:
+#            application/json:
+#              schema:
+#                $ref: 'commonGlossary.yaml#/components/schemas/errorResponse'
+#        '500':
+#          description: there has been some error dealing with the request.
+#          content:
+#            application/json:
+#              schema:
+#                $ref: 'commonGlossary.yaml#/components/schemas/errorResponse'
+#      tags:
+#        - analytics
+
+components:
+  schemas:
+    routesResponse:
+      type: object
+      description: information about the routes
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/routes'
+        units:
+          type: string
+        waypoints:
+          type: string
+        language:
+          type: string
+        
+    routes:
+      type: object
+      description: information about the routes
+      properties:
+        legs:
+          type: array
+          items:
+            $ref: '#/components/schemas/legs'
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/latLng'
+
+    latLng:
+      type: object
+      description: information about latitud and longitud
+      properties:
+        latitud:
+          type: number
+        longitud:
+          type: number
+
+    legs:
+      type: object
+      description: information about the steps
+      properties:
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/steps'
+        summary:
+          type: string
+        duration:
+          $ref: '#/components/schemas/duration'
+        distance:
+          $ref: '#/components/schemas/distance'
+
+    duration:
+      type: object
+      description: information
+      properties:
+        value:
+          type: integer
+        text:
+          type: string
+
+    distance:
+      type: object
+      description: information
+      properties:
+        value:
+          type: integer
+        text:
+          type: string
+
+    steps:
+      type: object
+      description: information about the steps
+      properties:
+        start_location:
+          $ref: '#/components/schemas/latLng'
+        end_location:
+          $ref: '#/components/schemas/latLng'
+        duration:
+          $ref: '#/components/schemas/distance'
+        distance:
+         $ref: '#/components/schemas/duration'
+        intruction:
+          type: string
+        verbal_transition_alert_instruction:
+          type: string
+        verbal_pre_transition_instruction:
+          type: string
+        verbal_post_transition_instruction:
+          type: string
+        travel_mode:
+          type: string
+        travel_type:
+          type: string
+        driving_side:
+          type: string
+
+    routesRequest:
+      type: object
+      description: information about the routes
+      properties:
+        version:
+          type: string
+        start:
+            $ref: '#/components/schemas/latLng'
+        destination:
+            $ref: '#/components/schemas/latLng'
+        driving_mode: 
+          type: string
+        language:
+          type: string
+        user_email:
+          type: string
+
+    userRequest:
+      type: object
+      description: information about the user
+      properties:
+        version:
+          type: string
+        name:
+            type: string
+        last_name:
+            type: string
+        gender: 
+          type: string
+        phone:
+          $ref: '#/components/schemas/phone'
+        height:
+          type: number
+        address:
+           $ref: '#/components/schemas/address'
+        favorite_places:
+          items:
+             $ref: '#/components/schemas/place'
+        config:
+          $ref: '#/components/schemas/config'
+
+    phone:
+      type: object
+      description: information about the user
+      properties:
+        code_country:
+            type: string
+        code_area:
+            type: string
+        number:
+            type: string
+
+    address:
+      type: object
+      description: information about the user
+      properties: 
+        street:
+          type: string
+        location:
+          $ref: '#/components/schemas/latLng'
+
+    place:
+      type: object
+      description: information about the user
+      properties:
+        name:
+          type: string
+        category:     
+          type: string
+        location: 
+          $ref: '#/components/schemas/latLng'
+
+    config:
+      type: object 
+      description: information about the user
+      properties: 
+        thema:
+          type: string
+        unit:
+          type: string
+        language:
+          type: string          
