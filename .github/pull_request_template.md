@@ -15,9 +15,9 @@
 ### :feelsgood:  Healthy :ambulance:
 <!--- I'm committed to have a healthy code -->
 
-- [] I have updated the documentation accordingly.
-- [] I have added tests to cover my changes(Unit & Integration).
-- [] I have set the _"[JIRA TICKET]"_ as a P.R. tittle prefix.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have added tests to cover my changes(Unit & Integration).
+- [ ] I have set the _"[JIRA TICKET]"_ as a P.R. tittle prefix.
 
 ### Steps
 <!--- OPTIONAL: A list of steps to reach the solution -->
