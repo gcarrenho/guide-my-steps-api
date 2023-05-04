@@ -1,0 +1,79 @@
+{
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+
+    // psioniq.psi-header settings
+    "psi-header.config": {
+        "forceToTop": true,
+        "blankLinesAfter": 1
+    },
+    "psi-header.lang-config": [
+        {
+            "language": "go",
+            "begin": "",
+            "prefix": "",
+            "suffix": "",
+            "end": ""
+        }
+    ],
+    "psi-header.templates": [
+        {
+            "language": "go",
+            "template": [
+                "// Add here the file description",
+                "//    - @author <<author>> <<<authoremail>>>",
+                "//    - @date <<filecreated('MMMM Do YYYY')>>",
+                "//    - @copyright Copyright (c) HP Inc, <<year>>",
+                "//        All rights reserved. Copying or other reproduction of this program except",
+                "//        for archival purposes is prohibited without written consent of HP Inc."
+            ]
+        }
+    ],
+    // GO settings
+    "go.coverOnSingleTestFile": true,
+    "go.coverOnSave": true,
+    "go.coverageDecorator": {
+		"coveredHighlightColor": "rgba(64,128,128,0.2)",
+		"uncoveredHighlightColor": "rgba(128,64,64,0.2)",
+    "coveredBorderColor": "rgba(64,128,128,0.05)",
+		"coveredGutterStyle": "blockgreen",
+		"uncoveredGutterStyle": "blockred"
+	},
+    "go.lintOnSave": "off",
+    "go.buildOnSave": "off",
+    "go.useLanguageServer": true,
+    "go.formatTool": "gofmt",
+    "[go]": {
+      "editor.insertSpaces": false,
+      "editor.tabSize": 4,
+      "editor.formatOnSave": true,
+      "editor.detectIndentation": false,
+    },
+    // todo-tree settings
+    "todo-tree.general.statusBar": "tags",
+    "todo-tree.highlights.customHighlight": {
+        "TODO": {
+            "icon": "check",
+            "type": "line",
+            "iconColour": "yellow",
+            "foreground": "red",
+            "background": "yellow"
+        },
+        "FIXME": {
+            "icon": "beaker",
+            "type": "line",
+            "iconColour": "red",
+            "foreground": "white",
+            "background": "red"
+        }
+    },
+    "cSpell.words": [
+        "autogen",
+        "Multicanvas",
+        "rollups",
+        "Wallcovering",
+        "Wallcoverings"
+    ],
+
+}
