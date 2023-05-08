@@ -23,15 +23,15 @@ jobs:
     - name: Test
       run: go test -v ./...
 
-    - name: Run linter
-      run: golangci-lint run
+    - name: Lint
+      run: go get golang.org/x/lint/golint && golint ./...
 
-    - name: Analyze with SonarCloud
-      uses: sonarsource/sonarcloud-github-action@master
-      with:
-        organization: "<your-organization>"
-        project: "<your-project>"
-        token: ${{ secrets.SONAR_TOKEN }}
+    #- name: Analyze with SonarCloud
+    #  uses: sonarsource/sonarcloud-github-action@master
+    #  with:
+    #    organization: "<your-organization>"
+    #    project: "<your-project>"
+    #    token: ${{ secrets.SONAR_TOKEN }}
           # Optional parameters:
           # fail-on-warnings: true
           # coverage-threshold: 80
