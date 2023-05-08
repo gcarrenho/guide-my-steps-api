@@ -1,5 +1,5 @@
 provider "google" {
-  project = "gcarreno-project-test"
+  project = "gcarreno-guide-my-steps"
   region  = "us-central1"
   zone    = "us-central1-c"
 }
