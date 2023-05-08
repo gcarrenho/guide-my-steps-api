@@ -1,3 +1,4 @@
+name: Go Build and Test with Lint
 on:
   push:
     branches: [ master ]
