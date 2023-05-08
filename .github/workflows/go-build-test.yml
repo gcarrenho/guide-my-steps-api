@@ -23,8 +23,11 @@ jobs:
     - name: Test
       run: go test -v ./...
 
-    - name: Lint
-      run: go get github.com/golangci/golangci-lint/cmd/golangci-lint && golint ./...
+    - uses: actions/checkout@v3
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v3
+    #- name: Lint
+    #  run: go get github.com/golangci/golangci-lint/cmd/golangci-lint && golint ./...
 
     #- name: Analyze with SonarCloud
     #  uses: sonarsource/sonarcloud-github-action@master
