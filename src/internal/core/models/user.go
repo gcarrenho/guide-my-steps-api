@@ -52,10 +52,28 @@ func NewUser(user User) User {
 	}
 }
 
-func GetLenghtStep(distance float64, user User) string {
-	if user.Config.Unit == "metros" {
-		return strconv.Itoa(int(distance))
+func GetLengthStep(distance float64, user User) string {
+	// mapea cada unidad de medida permitida a su función de conversión
+	unitConversions := map[string]func(float64) int{
+		"metros":     func(d float64) int { return int(d) },
+		"kilometros": func(d float64) int { return int(d / 1000) },
+		"millas":     func(d float64) int { return int(d * 0.00062137) },
+		"yardas":     func(d float64) int { return int(d * 1.0936) },
+		"braza":      func(d float64) int { return int(d * 0.546807) },
+		"pasos":      func(d float64) int { return int(int(distance * 100 / (user.Height * LengthStep[user.Gender]))) },
 	}
 
-	return strconv.Itoa(int(distance * 100 / (user.Height * LengthStep[user.Gender])))
+	if converter, ok := unitConversions[user.Config.Unit]; ok {
+		// si la unidad de medida del usuario se encuentra en el mapa, utiliza su función de conversión correspondiente
+		return strconv.Itoa(converter(distance))
+	} else {
+		// si no se encuentra, calcula la longitud de paso en función de la altura y el género del usuario
+		return strconv.Itoa(int(distance * 100 / (user.Height * LengthStep[user.Gender])))
+	}
+}
+
+var genderMap = map[string]string{
+	"femenino":   "f",
+	"masculino":  "m",
+	"sin genero": "sg",
 }
