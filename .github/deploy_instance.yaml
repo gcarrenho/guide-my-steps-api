@@ -15,7 +15,7 @@ defaults:
 
 jobs:
 
-  deplyment_by_terraform:
+  deployment_by_terraform:
     name: 'Deployment By Terraform'
     runs-on: ubuntu-latest
     if: ${{ github.event.label.name == 'deploy-staging' }}
