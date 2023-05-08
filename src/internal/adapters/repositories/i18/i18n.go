@@ -87,7 +87,7 @@ func transalation(loc *i18n.Localizer, steps models.Steps, messageID string, nex
 				"UNITS":        user.Config.Unit,
 				"COUNT_UNITS":  "x pasos",
 				"NEXT_VERBAL":  nextInstruction,
-				"LENGTH":       usermodel.GetLenghtStep(steps.Distance, user),
+				"LENGTH":       usermodel.GetLengthStep(steps.Distance, user),
 			},
 		})
 	default:
@@ -107,7 +107,7 @@ func transalation(loc *i18n.Localizer, steps models.Steps, messageID string, nex
 				"UNITS":        user.Config.Unit,
 				"COUNT_UNITS":  "x pasos", // se lo vamos a agregar desde flutter En x user.Config.units ....
 				"NEXT_VERBAL":  nextInstruction,
-				"LENGTH":       usermodel.GetLenghtStep(steps.Distance, user), //strconv.Itoa(int(steps.Distance / 0.762)),
+				"LENGTH":       usermodel.GetLengthStep(steps.Distance, user), //strconv.Itoa(int(steps.Distance / 0.762)),
 			},
 			PluralCount: 1,
 		})
