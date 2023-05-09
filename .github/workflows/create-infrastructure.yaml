@@ -16,7 +16,7 @@ defaults:
 jobs:
 
   deployment_by_terraform:
-    name: 'Deployment By Terraform'
+    name: 'Creating infra with terraform'
     runs-on: ubuntu-latest
     if: ${{ github.event.label.name == 'create-infra' }}
 
