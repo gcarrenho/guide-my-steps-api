@@ -31,11 +31,10 @@ jobs:
 
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v0'
+        uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_provider: 'projects/709484762220/locations/global/workloadIdentityPools/my-test/providers/my-test-provider'
-          service_account: 'cuentadetest@gcarreno-project-test.iam.gserviceaccount.com'
-
+          workload_identity_provider: 'projects/98843203215/locations/global/workloadIdentityPools/guide-my-steps-pool/providers/guide-my-steps-provider'
+          service_account: 'terraform@guide-my-steps.iam.gserviceaccount.com'
 
       # Generates an execution plan for Terraform
       - name: Terraform Apply
