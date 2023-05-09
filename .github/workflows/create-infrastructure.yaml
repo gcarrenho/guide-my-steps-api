@@ -18,7 +18,7 @@ jobs:
   deployment_by_terraform:
     name: 'Deployment By Terraform'
     runs-on: ubuntu-latest
-    if: ${{ github.event.label.name == 'deploy-staging' }}
+    if: ${{ github.event.label.name == 'create-infra' }}
 
     # Add "id-token" with the intended permissions.
     permissions:
