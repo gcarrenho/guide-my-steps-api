@@ -16,7 +16,7 @@ defaults:
 jobs:
 
   deployment_by_terraform:
-    name: 'Creating infra with terraform'
+    name: 'Destroing infra with terraform'
     runs-on: ubuntu-latest
     if: ${{ github.event.label.name == 'destroy-infra' }}
 
