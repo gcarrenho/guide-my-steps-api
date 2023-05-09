@@ -18,7 +18,7 @@ jobs:
   deployment_by_terraform:
     name: 'Creating infra with terraform'
     runs-on: ubuntu-latest
-    if: ${{ github.event.label.name == 'create-infra' }}
+    if: ${{ github.event.label.name == 'destroy-infra' }}
 
     # Add "id-token" with the intended permissions.
     permissions:
@@ -38,7 +38,7 @@ jobs:
 
       # Generates an execution plan for Terraform
       - name: Terraform Apply
-        continue-on-error: false
+        continue-on-error: true
         run: |
           terraform init 
-          terraform apply -auto-approve
+          terraform destroy -auto-approve
