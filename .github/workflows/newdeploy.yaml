@@ -1,6 +1,13 @@
 name: ci
 
-on: [push]
+on: 
+   push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*'
+#    push:
+#      branches:
+#         - master
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -23,3 +30,11 @@ jobs:
         with:
           push: true
           tags: gcarreno/guide-my-steps:latest
+
+      - 
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            *.jar
