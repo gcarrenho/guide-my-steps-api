@@ -33,7 +33,7 @@ jobs:
       #      type=raw,value={{sha}},enable=${{ github.ref_type != 'tag' }}
       
       - name: Log in to Docker Hub
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_TOKEN }}
           password: ${{ secrets.DOCKERHUB_USERNAME }}
