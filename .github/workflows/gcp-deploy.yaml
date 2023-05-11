@@ -5,7 +5,7 @@ on:
     types: [ labeled ]
 
 concurrency: 
-  group: ${{ github.action == 'deploy-staging' }}
+  group: ${{ github.action == 'create-infra' }}
   cancel-in-progress: true
 
 defaults:
