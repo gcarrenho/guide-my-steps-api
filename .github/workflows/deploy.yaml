@@ -3,48 +3,47 @@ name: Docker
 on:
  pull_request:
   types: [ labeled ]
+  tags:
+    - 'v[0-9]+.[0-9]+.[0-9]+'
 
 #concurrency: 
  #group: ${{ github.action == 'deploy-staging' }}
  #cancel-in-progress: true
 
-jobs:
-
-    deploy:
-      
-      name: Deploy
+ jobs:
+     build:
+      name: Build & push docker image
       runs-on: ubuntu-latest
-      if: ${{ github.event.label.name == 'deploy-staging' }}
-      #env:
-       #  IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}
+      env:
+        IMG_NAME: ${{ github.repository }}
       steps:
-        
-        #- name: Login
-         # uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-          #with:
-           # project_id: ${{ secrets.GCP_PROJECT_ID }}
-            #service_account_email: ${{ secrets.GCP_EMAIL }}
-            #service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-            
-        #- name: Configure Docker
-         # run: gcloud auth configure-docker --quiet
-            
-        - name: Checkout repository
-          uses: actions/checkout@v2
-
-        - name: Build Docker image
-          run: docker build . --tag guide-my-steps 
-
-        - name: Test Docker image
-          run: docker run guide-my-steps sh -c "go test -v" 
-
-        - name: Push Docker image
-          #run: docker push $IMAGE_NAME
-          run: docker push gcarreno/guide-my-steps:guide-my-steps 
-        #- name: Deploy Docker image
-         # run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image $IMAGE_NAME --region us-central1 --platform managed --allow-unauthenticated
-
-
-#docker tag local-image:tagname new-repo:tagname
-#docker push new-repo:tagname
-#docker push gcarreno/guide-my-steps:tagname
+		- name: Checkout
+		  uses: actions/checkout@v3
+  
+		- name: Debug
+		  run: |
+			echo "github.ref -> {{ github.ref }}"
+   
+		- name: Docker metadata
+		  id: metadata
+		  uses: docker/metadata-action@v3
+		  with:
+			images: ${{ env.IMG_NAME }}
+			tags: |
+			  type=semver,pattern={{version}}
+			  type=semver,pattern={{major}}.{{minor}}
+			  type=raw,value={{sha}},enable=${{ github.ref_type != 'tag' }}
+		- name: Log in to Docker Hub
+		  uses: docker/login-action@v1
+		  if: ${{ github.ref_type == 'tag' }}
+		  with:
+			username: ${{ secrets.DOCKER_USERNAME }}
+			password: ${{ secrets.DOCKER_PASSWORD }}
+  
+		- name: Build and push Docker image
+		  uses: docker/build-push-action@v2
+		  with:
+			context: .
+			push: ${{ github.event.base_ref =='refs/heads/main' && github.ref_type == 'tag' && !startsWith(github.ref, 'refs/tags/v0.')}}
+			tags: ${{ steps.metadata.outputs.tags }}
+			labels: ${{ steps.metadata.outputs.labels }}
