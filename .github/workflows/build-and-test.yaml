@@ -1,0 +1,9 @@
+name: ci
+
+on:
+    pull_request:
+      branches:
+         - master
+jobs:
+  call-workflow-build-test:
+   uses: ./.github/workflows/go-build-test-reusable-worflow.yaml
