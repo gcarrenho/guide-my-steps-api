@@ -38,7 +38,7 @@ jobs:
        # list of Docker images to use as base name for tags
        images: |
          gcarrenho/guide-my-steps-api
-         ghcr.io/gcarrenho/guide-my-steps-api
+ #        ghcr.io/gcarrenho/guide-my-steps-api
 
        # generate Docker tags based on the following events/attributes
        tags: |
@@ -75,5 +75,5 @@ jobs:
       with:
         push: true
         #tags: gcarreno/guide-my-steps:latest
-        tags: gcarreno/guide-my-steps:${{ steps.meta.outputs.tags }}
+        tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
