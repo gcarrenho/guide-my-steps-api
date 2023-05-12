@@ -76,5 +76,5 @@ jobs:
       with:
         push: true
         #tags: gcarreno/guide-my-steps:latest
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: gcarreno/guide-my-steps:${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
