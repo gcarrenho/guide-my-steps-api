@@ -6,6 +6,6 @@ on:
 
 jobs:
   call-workflow-build-test:
-   uses: ./.github/workflows/go-build-test-reusable-worflow.yaml
+   uses: ./.github/workflows/go-build-test-reusable-workflow.yaml
    if: ${{ github.event.label.name == 'deploy-staging' }}
 #  call-workflow-staging-gcp-deploy:
