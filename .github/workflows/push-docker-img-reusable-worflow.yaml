@@ -1,14 +1,27 @@
 name: ci
+on:
+  schedule:
+    - cron: "0 10 * * *"
+  push:
+    branches:
+     - "**"
+    tags:
+      - "v*.*.*"
+  pull_request:
+    branches:
+      - "master"
+#on:
+ #schedule:
+ #- cron: "0 10 * * *"
 
-on: 
-  workflow_call:
-    secrets:
-      repo_token:
-         required: true
-      docker_user:
-        required: true
-      docker_token:
-         required: true
+ #workflow_call:
+ #   secrets:
+ #     repo_token:
+ #        required: true
+ #     docker_user:
+ #       required: true
+ #     docker_token:
+ #        required: true
 
 jobs:
   triage:
