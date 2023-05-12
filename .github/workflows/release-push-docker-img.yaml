@@ -17,7 +17,7 @@ on:
 #      branches:
 #         - master
 jobs:
-  docker:
+  triage:
     runs-on: ubuntu-latest
     steps:
       -
