@@ -9,12 +9,16 @@ on:
       branches:
          - master
 jobs:
-  call-workflow-build-test:
+ call-workflow-build-test:
    uses: ./.github/workflows/go-build-test-reusable-workflow.yaml
-  call-workflow-release-and-push-docker:
-   uses: ./.github/workflows/release-push-docker-reusable-wokflow.yaml
+ call-workflow-release-and-push-docker:
+   uses: ./.github/workflows/push-docker-img-reusable-worflow.yaml
    secrets:
     repo_token: ${{ secrets.MYTOKEN }}
     docker_user: ${{ secrets.DOCKERHUB_USERNAME }}
     docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
+ call-workflow-release:
+    uses: ./.github/workflows/release.yaml
+    secrets:
+     repo_token: ${{ secrets.MYTOKEN }}
 #  call-workflow-deploy-gcp:
