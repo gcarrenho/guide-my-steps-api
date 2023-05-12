@@ -13,3 +13,4 @@ jobs:
    uses: ./.github/workflows/go-build-test.yaml
   call-workflow-2-in-local-repo:
    uses: ./.github/workflows/release-push-docker-img.yaml
+   secrets: inherit
