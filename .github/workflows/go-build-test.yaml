@@ -1,12 +1,12 @@
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  workflow_call:
+#  push:
+#    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
 
 jobs:
-
-  build:
+   reusable_workflow_job:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
