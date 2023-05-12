@@ -38,7 +38,7 @@ jobs:
        # list of Docker images to use as base name for tags
        images: |
          gcarreno/guide-my-steps
- #        ghcr.io/gcarrenho/guide-my-steps-api
+         ghcr.io/gcarrenho/guide-my-steps-api
 
        # generate Docker tags based on the following events/attributes
        tags: |
@@ -62,13 +62,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-     #-
-      #name: Login to GHCR
-      #uses: docker/login-action@v2
-      #with:
-      #  registry: ghcr.io
-      #  username: ${{ github.repository_owner }}
-      #  password: ${{ secrets.MYTOKEN }}
+     -
+      name: Login to GHCR
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.MYTOKEN }}
      -
       name: Build and push
       uses: docker/build-push-action@v4
