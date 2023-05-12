@@ -9,11 +9,12 @@ on: push
 #      branches:
 #         - master
 jobs:
-  call-workflow-1-in-local-repo:
+  call-workflow-build-test:
    uses: ./.github/workflows/go-build-test.yaml
-  call-workflow-2-in-local-repo:
+  call-workflow-release-and-push-docker:
    uses: ./.github/workflows/release-push-docker-img.yaml
    secrets:
     repo_token: ${{ secrets.MYTOKEN }}
     docker_user: ${{ secrets.DOCKERHUB_USERNAME }}
     docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
+#  call-workflow-deploy-gcp:

@@ -1,0 +1,11 @@
+name: staging-deploy
+
+on:
+  pull_request:
+    types: [ labeled ]
+
+jobs:
+  call-workflow-build-test:
+   uses: ./.github/workflows/go-build-test.yaml
+   if: ${{ github.event.label.name == 'deploy-staging' }}
+#  call-workflow-staging-gcp-deploy:
