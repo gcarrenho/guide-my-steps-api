@@ -29,7 +29,7 @@ jobs:
        images: |
          gcarreno/guide-my-steps
          ghcr.io/gcarrenho/guide-my-steps-api
-
+       flavor: latest=true
        # generate Docker tags based on the following events/attributes
        tags: |
          type=schedule
@@ -54,7 +54,6 @@ jobs:
 
      -
       name: Login to GHCR
-      if: github.ref_type == 'tag'
       uses: docker/login-action@v2
       with:
         registry: ghcr.io
@@ -64,7 +63,7 @@ jobs:
       name: Build and push
       uses: docker/build-push-action@v4
       with:
-        push: ${{ github.ref_type == 'tag' }}
+        push: true
         #tags: gcarreno/guide-my-steps:latest
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}

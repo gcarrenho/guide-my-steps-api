@@ -8,10 +8,13 @@ on:
     push:
       branches:
          - master
+      tags:
+        - 'v*'		 
 jobs:
  call-workflow-build-test:
    uses: ./.github/workflows/go-build-test-reusable.yaml
  call-workflow-release-and-push-docker:
+   if: github.ref_type == 'tag'
    uses: ./.github/workflows/push-docker-img-reusable.yaml
    secrets:
     repo_token: ${{ secrets.MYTOKEN }}
