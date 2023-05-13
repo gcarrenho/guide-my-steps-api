@@ -9,9 +9,21 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    # Add "id-token" with the intended permissions.
+    permissions:
+        contents: 'read'
+        id-token: 'write'
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+     # - name: Set up Google Cloud SDK
+     #   uses: google-github-actions/setup-gcloud@v0.5.0
+     #   with:
+     #     project_id: <tu-id-de-proyecto>
+     #     service_account_key: ${{ secrets.GCP_SA_KEY }}
+      #    export_default_credentials: true
 
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
