@@ -19,6 +19,7 @@ env:
 jobs:
   triage:
     runs-on: ubuntu-latest
+    if: ${{ github.event.label.name == 'deploy-staging' }}
     steps:
      -
       name: Checkout
@@ -81,13 +82,13 @@ jobs:
         workload_identity_provider: 'projects/98843203215/locations/global/workloadIdentityPools/guide-my-steps-pool/providers/guide-my-steps-provider'
         service_account: 'terraform@guide-my-steps.iam.gserviceaccount.com'
 
-     - 
-      name: Deploy to CloudRun        
-      run: |-
-        gcloud run deploy "$SERVICE_NAME" \   
-          --quiet \            
-          --image "ghcr.io/gcarrenho/guide-my-steps-api:latest" \
-          --region "$RUN_REGION" \            
-          --platform "managed" \ 
-          --allow-unauthenticated \            
-          --memory=512Mi
+#     - 
+#      name: Deploy to CloudRun        
+#      run: |-
+#        gcloud run deploy "$SERVICE_NAME" \   
+#          --quiet \            
+#          --image "ghcr.io/gcarrenho/guide-my-steps-api:latest" \
+#          --region "$RUN_REGION" \            
+#          --platform "managed" \ 
+#          --allow-unauthenticated \            
+#          --memory=512Mi
