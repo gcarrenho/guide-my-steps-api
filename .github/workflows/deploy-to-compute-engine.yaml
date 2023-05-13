@@ -1,14 +1,5 @@
-name: Deploy to Compute Engine
-
 on:
  workflow_call:
-    secrets:
-      repo_token:
-         required: true
-      docker_user:
-         required: true
-      docker_token:
-         required: true
 #  pull_request:
 #    branches:
 #      - master
