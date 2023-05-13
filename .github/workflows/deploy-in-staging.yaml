@@ -2,9 +2,7 @@ name: deploying-staging
 
 on:
   pull_request:
-    branches:
-       - master
-#    types: [ labeled ]
+    types: [ labeled ]
 
 jobs:
   call-workflow-build-test:
