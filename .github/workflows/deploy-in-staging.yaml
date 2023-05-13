@@ -5,14 +5,15 @@ on:
     types: [ labeled ]
 
 jobs:
-  call-workflow-build-test:
-   if: ${{ github.event.label.name == 'deploy-staging' }}
-   uses: ./.github/workflows/push-docker-img-reusable.yaml
-   secrets:
-    repo_token: ${{ secrets.MYTOKEN }}
-    docker_user: ${{ secrets.DOCKERHUB_USERNAME }}
-    docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
+  #call-workflow-build-test:
+   #if: ${{ github.event.label.name == 'deploy-staging' }}
+   #uses: ./.github/workflows/push-docker-img-reusable.yaml
+   #secrets:
+    #repo_token: ${{ secrets.MYTOKEN }}
+    #docker_user: ${{ secrets.DOCKERHUB_USERNAME }}
+    #docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
   call-workflow-staging-gcp-deploy:
+   if: ${{ github.event.label.name == 'deploy-staging' }}
 #   needs: call-workflow-build-test
    uses: ./.github/workflows/deploy-to-compute-engine.yaml
    secrets:
