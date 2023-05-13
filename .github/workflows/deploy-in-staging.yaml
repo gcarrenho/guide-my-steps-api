@@ -1,4 +1,4 @@
-name: staging-deploy
+name: deploying-staging
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   call-workflow-build-test:
-   uses: ./.github/workflows/push-docker-img-reusable-worflow.yaml
+   uses: ./.github/workflows/push-docker-img-reusable.yaml
    if: ${{ github.event.label.name == 'deploy-staging' }}
    secrets:
     repo_token: ${{ secrets.MYTOKEN }}
