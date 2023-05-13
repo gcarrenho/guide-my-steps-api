@@ -13,6 +13,9 @@ on:
       docker_token:
          required: true
 
+env:
+   RUN_REGION: europe-west1
+   SERVICE_NAME: api
 jobs:
   triage:
     runs-on: ubuntu-latest
@@ -67,3 +70,22 @@ jobs:
         #tags: gcarreno/guide-my-steps:latest
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+
+     -
+      id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        workload_identity_provider: 'projects/98843203215/locations/global/workloadIdentityPools/guide-my-steps-pool/providers/guide-my-steps-provider'
+        service_account: 'terraform@guide-my-steps.iam.gserviceaccount.com'
+
+     - 
+      name: Deploy to CloudRun        
+      run: |-
+        gcloud run deploy "$SERVICE_NAME" \   
+          --quiet \            
+          --image "ghcr.io/gcarrenho/guide-my-steps-api:latest" \
+          --region "$RUN_REGION" \            
+          --platform "managed" \ 
+          --allow-unauthenticated \            
+          --memory=512Mi
