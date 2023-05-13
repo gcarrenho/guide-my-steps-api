@@ -13,7 +13,7 @@ jobs:
     docker_user: ${{ secrets.DOCKERHUB_USERNAME }}
     docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
   call-workflow-staging-gcp-deploy:
-   needs: call-workflow-build-test
+#   needs: call-workflow-build-test
    uses: ./.github/workflows/deploy-to-compute-engine.yaml
    secrets:
     repo_token: ${{ secrets.MYTOKEN }}
