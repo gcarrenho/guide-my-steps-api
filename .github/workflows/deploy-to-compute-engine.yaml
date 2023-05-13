@@ -32,6 +32,11 @@ jobs:
           workload_identity_provider: 'projects/98843203215/locations/global/workloadIdentityPools/guide-my-steps-pool/providers/guide-my-steps-provider'
           service_account: 'github-action-service-account@guide-my-steps.iam.gserviceaccount.com'
 
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+        with:
+         version: '>= 363.0.0'
+
       - name: Configure Docker
         run: |
           sudo apt-get install -y docker.io
