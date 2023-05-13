@@ -25,7 +25,7 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           workload_identity_provider: 'projects/98843203215/locations/global/workloadIdentityPools/guide-my-steps-pool/providers/guide-my-steps-provider'
-          service_account: 'terraform@guide-my-steps.iam.gserviceaccount.com'
+          service_account: 'github-action-service-account@guide-my-steps.iam.gserviceaccount.com'
 
       - name: Configure Docker
         run: |
