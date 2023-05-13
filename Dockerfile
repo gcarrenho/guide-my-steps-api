@@ -5,6 +5,8 @@ RUN go build -o guide-my-steps src/cmd/main.go
 
 
 # Building image with the binary
-FROM scratch
+FROM alpine:latest AS production
 COPY --from=build /go/src/guide-my-steps .
-ENTRYPOINT ["./guide-my-steps"]
+COPY src/internal/locales ./internal/locales 
+EXPOSE 8080
+CMD ["./guide-my-steps"]
