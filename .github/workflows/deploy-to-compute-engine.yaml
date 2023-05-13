@@ -1,0 +1,47 @@
+name: Deploy to Compute Engine
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+     # - name: Set up Google Cloud SDK
+     #   uses: google-github-actions/setup-gcloud@v0.5.0
+     #   with:
+     #     project_id: <tu-id-de-proyecto>
+     #     service_account_key: ${{ secrets.GCP_SA_KEY }}
+      #    export_default_credentials: true
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: 'projects/98843203215/locations/global/workloadIdentityPools/guide-my-steps-pool/providers/guide-my-steps-provider'
+          service_account: 'terraform@guide-my-steps.iam.gserviceaccount.com'
+
+      - name: Configure Docker
+        run: |
+          sudo apt-get install -y docker.io
+
+      - name: Log in to GHCR
+        run: |
+          echo ${{ secrets.MYTOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Pull and run container
+        run: |
+          docker pull ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df
+          docker run -d --name guide-my-steps ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df
+
+      - name: Deploy container to Compute Engine
+        run: |
+          gcloud compute instances update-container testvmcontainer-1 \
+            --container-image ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df \
+            --zone <zona>
