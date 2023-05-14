@@ -124,9 +124,9 @@ jobs:
 
 
       - 
-       name: Despliegue de la imagen en la VM
-       run: |
-        gcloud compute ssh  ${{ steps.assign_instance.outputs.instance }} --zone us-central1-a --project guide-my-steps --command "
-        docker pull ghcr.io/gcarrenho/guide-my-steps-api:latest
-        docker run -d --name guide-my-steps -p 8080:8080 ghcr.io/gcarrenho/guide-my-steps-api/guide-my-steps:latest"
+        name: Despliegue de la imagen en la VM
+        run: |
+         gcloud compute ssh  ${{ steps.assign_instance.outputs.instance }} --zone us-central1-a --project guide-my-steps --command "
+         docker pull ghcr.io/gcarrenho/guide-my-steps-api:latest
+         docker run -d --name guide-my-steps -p 8080:8080 ghcr.io/gcarrenho/guide-my-steps-api/guide-my-steps:latest"
 		
