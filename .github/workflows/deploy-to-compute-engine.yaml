@@ -118,7 +118,7 @@ jobs:
       - 
        name: Deploy container to Compute Engine
        run: |
-        gcloud compute ssh ${{ steps.assign_instance.outputs.instance }} --zone us-central1-a
+        gcloud compute ssh testvmcontainer-1 --zone=us-central1-a --command="ps -ejH"
 
 #      - 
 #       name: Deploy container to Compute Engine
