@@ -1,15 +1,13 @@
 name: deploy-compute-engine
 
 on:
-# workflow_call:
   push:
     branches:
      - master
 
   pull_request:
     types: [ labeled ] 
-#    branches:
-#      - master
+
 
 jobs:
   push-docker-img:
@@ -63,7 +61,6 @@ jobs:
        uses: docker/build-push-action@v4
        with:
         push: true
-        #tags: gcarreno/guide-my-steps:latest
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
