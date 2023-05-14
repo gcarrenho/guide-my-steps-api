@@ -102,8 +102,8 @@ jobs:
 
       - name: Pull and run container
         run: |
-          docker pull ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df
-          docker run -d --name guide-my-steps ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df
+          docker pull ghcr.io/gcarrenho/guide-my-steps-api:${{ github.sha }}
+          docker run -d --name guide-my-steps ghcr.io/gcarrenho/guide-my-steps-api:${{ github.sha }}
 
       - 
         name: Assign instance
@@ -119,6 +119,6 @@ jobs:
        name: Deploy container to Compute Engine
        run: |
         gcloud compute instances update-container ${{ steps.assign_instance.outputs.instance }} \
-          --container-image ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df \
+          --container-image ghcr.io/gcarrenho/guide-my-steps-api:${{ github.sha }} \
           --zone us-central1-a
 
