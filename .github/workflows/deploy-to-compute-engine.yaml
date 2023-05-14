@@ -12,7 +12,7 @@ on:
 #      - master
 
 jobs:
-  pushdocker:
+  push-docker-img:
     runs-on: ubuntu-latest
     if: ${{ github.event.label.name == 'deploy-staging' }}
     steps:
@@ -67,10 +67,10 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
-  deploygcp:
+  deploy-to-gcpvm:
     runs-on: ubuntu-latest
     #if: ${{ github.event.label.name == 'deploy-staging' }}
-    needs: pushdocker
+    needs: push-docker-img
 
     # Add "id-token" with the intended permissions.
     permissions:
@@ -113,5 +113,5 @@ jobs:
        name: Deploy container to Compute Engine
        run: |
           gcloud compute instances update-container testvmcontainer-1 \
-            --container-image ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df \
+            --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest \
             --zone us-central1-a
