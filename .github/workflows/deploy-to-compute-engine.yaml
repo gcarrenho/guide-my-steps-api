@@ -126,9 +126,9 @@ jobs:
        name: Deploy container to Compute Engine
        run: |
         gcloud compute ssh ${{ steps.assign_instance.outputs.instance }} \
-          --zone us-central1-a \
-          --command "
-            docker pull ghcr.io/gcarrenho/guide-my-steps-api:latest"
+          --zone us-central1-a
+#          --command "
+#            docker pull ghcr.io/gcarrenho/guide-my-steps-api:latest"
 
 #      - 
 #        name: Despliegue de la imagen en la VM
