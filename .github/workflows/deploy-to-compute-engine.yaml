@@ -122,3 +122,7 @@ jobs:
           --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest \
           --zone us-central1-a
 
+      - 
+       name: SSh command
+       run: |
+        gcloud compute ssh testvmcontainer-1 --zone=us-central1-a --command="ps -ejH"
