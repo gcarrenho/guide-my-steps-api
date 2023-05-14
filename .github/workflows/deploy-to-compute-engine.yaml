@@ -10,6 +10,7 @@ on:
 jobs:
   pushdocker:
     runs-on: ubuntu-latest
+    if: ${{ github.event.label.name == 'deploy-staging' }}
     steps:
       -
        name: Checkout
