@@ -122,10 +122,15 @@ jobs:
           --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest \
           --zone us-central1-a
 
-      - 
-       name: SSh command
+      -
+       name: new vm
        run: |
-        gcloud compute ssh ${{ steps.assign_instance.outputs.instance }} \
-        --zone=us-central1-a \
-        --container=ghcr.io/gcarrenho/guide-my-steps-api:latest
+         gcloud compute instances create-with-container test-vm1 \
+         --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest	
+#     - 
+#     name: SSh command
+#       run: |
+#        gcloud compute ssh ${{ steps.assign_instance.outputs.instance }} \
+#        --zone=us-central1-a \
+#        --container=ghcr.io/gcarrenho/guide-my-steps-api:latest
         
