@@ -2,7 +2,7 @@ name: deploy-compute-engine
 
 on:
  workflow_call:
-#  pull_request:
+#  pull_request: se puede borrar este file
 #    branches:
 #      - master
 
