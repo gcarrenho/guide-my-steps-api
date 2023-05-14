@@ -72,6 +72,14 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
 
      - 
+      id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+       workload_identity_provider: 'projects/98843203215/locations/global/workloadIdentityPools/guide-my-steps-pool/providers/guide-my-steps-provider'
+       service_account: 'github-action@guide-my-steps.iam.gserviceaccount.com'
+
+     - 
       name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v1'
 
