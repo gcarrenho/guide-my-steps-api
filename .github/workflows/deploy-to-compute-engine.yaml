@@ -119,6 +119,6 @@ jobs:
        name: Deploy container to Compute Engine
        run: |
         gcloud compute instances update-container ${{ steps.assign_instance.outputs.instance }} \
-          --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest \
+          --container-image ghcr.io/gcarrenho/guide-my-steps-api:sha-3b833dd \
           --zone us-central1-a
 
