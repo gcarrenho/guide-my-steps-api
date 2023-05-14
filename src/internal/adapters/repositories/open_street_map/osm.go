@@ -49,8 +49,8 @@ func (r *routingRepo) GetRouting(routesRequest models.RoutesRequest) (*osmmodels
 	return &osmResponse, nil
 }
 
-var drivingMode = map[string]string{
+/*var drivingMode = map[string]string{
 	"foot":             "routed-foot",
 	"public-transport": "",
 	"car":              "routed-car",
-}
+}*/
