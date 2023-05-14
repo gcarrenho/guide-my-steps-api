@@ -2,7 +2,9 @@ name: deploying-staging
 
 on:
   pull_request:
-    types: [ labeled ]
+    branches:
+        - master
+#    types: [ labeled ]
 
 jobs:
 #   call-workflow-staging-gcp-deploy:
@@ -14,7 +16,7 @@ jobs:
 #     docker_user: ${{ secrets.DOCKERHUB_USERNAME }}
 #     docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
   call-workflow-build-test:
-   if: ${{ github.event.label.name == 'deploy-staging' }}
+#   if: ${{ github.event.label.name == 'deploy-staging' }}
    uses: ./.github/workflows/push-docker-img-reusable.yaml
    secrets:
     repo_token: ${{ secrets.MYTOKEN }}
