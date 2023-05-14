@@ -110,9 +110,9 @@ jobs:
         id: assign_instance
         run: |
          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/master" ]; then
-          echo "::set-output name=instance::production-1"
+          echo "::set-output name=instance::gms-api-production"
          elif [ "${{ github.event_name }}" == "pull_request" ]; then
-          echo "::set-output name=instance::instance-2"
+          echo "::set-output name=instance::gms-api-staging"
          fi
   
       - 
