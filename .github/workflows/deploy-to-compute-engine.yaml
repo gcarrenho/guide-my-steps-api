@@ -1,15 +1,17 @@
 name: deploy-compute-engine
 
 on:
- workflow_call:
-#  pull_request: se puede borrar este file
+# workflow_call:
+  pull_request:
+    branches:
+     - master 
 #    branches:
 #      - master
 
 jobs:
   triage:
     runs-on: ubuntu-latest
-
+    #if: ${{ github.event.label.name == 'deploy-staging' }}
     # Add "id-token" with the intended permissions.
     permissions:
         contents: 'read'
