@@ -111,7 +111,7 @@ jobs:
         run: |
          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/master" ]; then
           gcloud compute machine-images create my-machine-image  \
-          --source-instance= gms-api-staging
+          --source-instance=gms-api-staging
           gcloud compute instances create gms-api-prod-v1 \
           --zone=us-east1-b \
           --source-machine-image=my-machine-image
