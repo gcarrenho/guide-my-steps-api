@@ -71,31 +71,28 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
-     -
-      uses: actions/checkout@v2
+  deployment:
+   runs-on: ubuntu-latest
+   steps:
+     - 
+      name: Checkout repository
+      uses: actions/checkout@v3
 
-     -
-       uses: ./.github/workflows/deploy-to-compute-engine.yaml
+     - 
+      id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+       workload_identity_provider: 'projects/98843203215/locations/global/workloadIdentityPools/guide-my-steps-pool/providers/guide-my-steps-provider'
+       service_account: 'github-action@guide-my-steps.iam.gserviceaccount.com'
 
-#     - 
-#      name: Checkout repository
-#      uses: actions/checkout@v3
+     - 
+      name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
 
-#     - 
-#      id: 'auth'
-#      name: 'Authenticate to Google Cloud'
-#      uses: 'google-github-actions/auth@v1'
-#      with:
-#       workload_identity_provider: 'projects/98843203215/locations/global/workloadIdentityPools/guide-my-steps-pool/providers/guide-my-steps-provider'
-#       service_account: 'github-action@guide-my-steps.iam.gserviceaccount.com'
-
-#     - 
-#      name: 'Set up Cloud SDK'
-#      uses: 'google-github-actions/setup-gcloud@v1'
-
-#     - 
-#      name: Deploy container to Compute Engine
-#      run: |
-#        gcloud compute instances update-container testvmcontainer-1 \
-#        --container-image ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df \
-#        --zone us-central1-a
+     - 
+      name: Deploy container to Compute Engine
+      run: |
+        gcloud compute instances update-container testvmcontainer-1 \
+        --container-image ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df \
+        --zone us-central1-a
