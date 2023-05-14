@@ -115,10 +115,21 @@ jobs:
           echo "::set-output name=instance::testvmcontainer-1"
          fi
   
-      - 
-       name: Deploy container to Compute Engine
-       run: |
-        gcloud compute instances update-container ${{ steps.assign_instance.outputs.instance }} \
-          --container-image ghcr.io/gcarrenho/guide-my-steps-api:${{ github.sha }} \
-          --zone us-central1-a
+      #- 
+      # name: Deploy container to Compute Engine
+      # run: |
+      #  gcloud compute instances update-container ${{ steps.assign_instance.outputs.instance }} \
+      #    --container-image ghcr.io/gcarrenho/guide-my-steps-api:${{ github.sha }} \
+      #    --zone us-central1-a
 
+
+      - 
+       name: Despliegue de la imagen en la VM
+       run: |
+        # Configurar la conexión SSH con la instancia de VM
+        gcloud compute ssh  ${{ steps.assign_instance.outputs.instance }} --zone us-central1-a --project guide-my-steps --command "
+        # Descargar la imagen del registro de contenedores de GitHub
+        docker pull ghcr.io/gcarrenho/guide-my-steps-api:latest
+        # Ejecutar el contenedor en la VM de Google Cloud
+         docker run -d --name guide-my-steps -p 8080:8080 ghcr.io/gcarrenho/guide-my-steps-api/guide-my-steps:latest"
+		
