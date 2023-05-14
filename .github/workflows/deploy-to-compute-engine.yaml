@@ -12,7 +12,7 @@ on:
 jobs:
   buil-and-push-docker-img:
     runs-on: ubuntu-latest
-    if: ${{ github.event.label.name == 'deploy-staging' }}
+    if: ${{ github.ref == 'refs/heads/master' || github.event.label.name == 'deploy-staging' }}
     steps:
       -
        name: Checkout
