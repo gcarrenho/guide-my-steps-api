@@ -125,4 +125,7 @@ jobs:
       - 
        name: SSh command
        run: |
-        gcloud compute ssh ${{ steps.assign_instance.outputs.instance }} --zone=us-central1-a --command=" docker pull ghcr.io/gcarrenho/guide-my-steps-api:latest"
+        gcloud compute ssh ${{ steps.assign_instance.outputs.instance }} \
+        --zone=us-central1-a \
+        --container=ghcr.io/gcarrenho/guide-my-steps-api:latest
+        
