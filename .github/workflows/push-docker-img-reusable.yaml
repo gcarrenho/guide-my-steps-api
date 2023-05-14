@@ -71,6 +71,16 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
+     - 
+      name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
+
+     - 
+      name: Deploy container to Compute Engine
+      run: |
+        gcloud compute instances update-container testvmcontainer-1 \
+        --container-image ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df \
+        --zone us-central1-a
 #     -
 #      uses: 'actions/checkout@v3'
 #     -
