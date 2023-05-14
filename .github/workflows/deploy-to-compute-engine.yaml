@@ -102,7 +102,7 @@ jobs:
 
       #- name: Pull and run container
       #  run: |
-      #    docker pull ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df
+      #    docker pull ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6d
       #    docker run -d --name guide-my-steps ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df
 
       - 
@@ -110,6 +110,11 @@ jobs:
         id: assign_instance
         run: |
          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/master" ]; then
+          gcloud compute machine-images create my-machine-image  \
+          --source-instance= gms-api-staging
+          gcloud compute instances create gms-api-prod-v1 \
+          --zone=us-east1-b \
+          --source-machine-image=my-machine-image
           echo "::set-output name=instance::gms-api-production"
          elif [ "${{ github.event_name }}" == "pull_request" ]; then
           echo "::set-output name=instance::gms-api-staging"
