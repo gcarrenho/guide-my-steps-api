@@ -100,10 +100,10 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.MYTOKEN }}
 
-      - name: Pull and run container
-        run: |
-          docker pull ghcr.io/gcarrenho/guide-my-steps-api:${{ github.sha }}
-          docker run -d --name guide-my-steps ghcr.io/gcarrenho/guide-my-steps-api:${{ github.sha }}
+      #- name: Pull and run container
+      #  run: |
+      #    docker pull ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df
+      #    docker run -d --name guide-my-steps ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df
 
       - 
         name: Assign instance
@@ -119,14 +119,6 @@ jobs:
        name: Deploy container to Compute Engine
        run: |
         gcloud compute instances update-container ${{ steps.assign_instance.outputs.instance }} \
-          --container-image ghcr.io/gcarrenho/guide-my-steps-api:${{ github.sha }} \
+          --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest \
           --zone us-central1-a
 
-
-#      - 
-#        name: Despliegue de la imagen en la VM
-#        run: |
-#         gcloud compute ssh  ${{ steps.assign_instance.outputs.instance }} --zone us-central1-a --project guide-my-steps --command "
-#         docker pull ghcr.io/gcarrenho/guide-my-steps-api:latest
-#         docker run -d --name guide-my-steps -p 8080:8080 ghcr.io/gcarrenho/guide-my-steps-api/guide-my-steps:latest"
-		
