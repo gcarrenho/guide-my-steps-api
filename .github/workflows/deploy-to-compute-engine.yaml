@@ -63,9 +63,11 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
-  triage:
+  deploygcp:
     runs-on: ubuntu-latest
     #if: ${{ github.event.label.name == 'deploy-staging' }}
+    needs: pushdocker
+
     # Add "id-token" with the intended permissions.
     permissions:
         contents: 'read'
