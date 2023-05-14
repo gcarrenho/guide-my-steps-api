@@ -1,0 +1,22 @@
+name: release
+
+on: 
+  workflow_call:
+    secrets:
+      repo_token:
+       required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: "Creating release"
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.repo_token }}"
+          automatic_release_tag:  "${{ github.sha }}"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            *.jar
