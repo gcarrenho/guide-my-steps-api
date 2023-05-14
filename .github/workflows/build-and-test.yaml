@@ -6,4 +6,4 @@ on:
          - master
 jobs:
   call-workflow-build-test:
-   uses: ./.github/workflows/go-build-test-reusables.yaml
+   uses: ./.github/workflows/go-build-test-reusable.yaml
