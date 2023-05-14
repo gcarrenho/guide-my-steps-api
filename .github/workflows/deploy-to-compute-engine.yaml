@@ -107,8 +107,19 @@ jobs:
       #    docker run -d --name guide-my-steps ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df
 
       - 
+        name: Assign instance
+        id: assign_instance
+        run: |
+         if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/master" ]; then
+          echo "::set-output name=instance::production-1"
+         elif [ "${{ github.event_name }}" == "pull_request" ]; then
+          echo "::set-output name=instance::testvmcontainer-1"
+         fi
+  
+      - 
        name: Deploy container to Compute Engine
        run: |
-          gcloud compute instances update-container testvmcontainer-1 \
-            --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest \
-            --zone us-central1-a
+        gcloud compute instances update-container ${{ steps.assign_instance.outputs.instance }} \
+          --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest \
+          --zone us-central1-a
+
