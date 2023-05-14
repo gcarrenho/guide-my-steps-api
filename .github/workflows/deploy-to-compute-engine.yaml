@@ -1,4 +1,4 @@
-name: deploy-compute-engine
+name: cd
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 
 jobs:
-  push-docker-img:
+  buil-and-push-docker-img:
     runs-on: ubuntu-latest
     if: ${{ github.event.label.name == 'deploy-staging' }}
     steps:
@@ -64,10 +64,9 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
-  deploy-to-gcpvm:
+  deploy-img-to-gcpvm:
     runs-on: ubuntu-latest
-    #if: ${{ github.event.label.name == 'deploy-staging' }}
-    needs: push-docker-img
+    needs:  buil-and-push-docker-img
 
     # Add "id-token" with the intended permissions.
     permissions:
