@@ -112,7 +112,7 @@ jobs:
          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/master" ]; then
           echo "::set-output name=instance::production-1"
          elif [ "${{ github.event_name }}" == "pull_request" ]; then
-          echo "::set-output name=instance::testvmcontainer-1"
+          echo "::set-output name=instance::instance-2"
          fi
   
       - 
@@ -122,11 +122,7 @@ jobs:
           --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest \
           --zone us-central1-a
 
-      -
-       name: new vm
-       run: |
-         gcloud compute instances create-with-container test-vm1 \
-         --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest	
+	
 #     - 
 #     name: SSh command
 #       run: |
