@@ -46,5 +46,8 @@ func InitRoutes() {
 	handlers.NewRoutingHandler(group, routingSvc, userSvc)
 
 	fmt.Println("Listening and serving HTTP on :8080")
-	router.Run(":8080")
+	err = router.Run(":8080")
+	if err != nil {
+		fmt.Println(err)
+	}
 }

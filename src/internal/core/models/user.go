@@ -71,9 +71,3 @@ func GetLengthStep(distance float64, user User) string {
 		return strconv.Itoa(int(distance * 100 / (user.Height * LengthStep[user.Gender])))
 	}
 }
-
-var genderMap = map[string]string{
-	"femenino":   "f",
-	"masculino":  "m",
-	"sin genero": "sg",
-}

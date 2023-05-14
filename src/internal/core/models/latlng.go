@@ -5,13 +5,6 @@ type LatLng struct {
 	Longitud float64
 }
 
-func getLatLng() LatLng {
-	return LatLng{
-		//Latitud:  coordinate[0][0],
-		//Longitud: coordinate[0][1],
-	}
-}
-
 func CastToLatLng(coordinate [][]float64) []LatLng {
 	var latLngList []LatLng
 	for _, c := range coordinate {
