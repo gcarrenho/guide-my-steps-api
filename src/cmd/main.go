@@ -32,7 +32,7 @@ func InitRoutes() {
 	postgreConf := postgresql.NewPostgreSQLConf()
 	postgreSQLDB, err := postgreConf.InitPostgreSQLDB()
 	if err != nil {
-
+		fmt.Println(err)
 	}
 
 	// repositories
