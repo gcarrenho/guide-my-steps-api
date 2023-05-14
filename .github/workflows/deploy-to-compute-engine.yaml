@@ -33,7 +33,7 @@ jobs:
           type=ref,event=branch
           type=ref,event=pr
           type=semver,pattern={{version}}
-          type=${{ github.sha }}
+          type=sha
          #type=semver,pattern={{major}}.{{minor}}
          #        type=semver,pattern={{major}}
       -
