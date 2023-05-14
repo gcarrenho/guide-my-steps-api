@@ -102,7 +102,7 @@ jobs:
 
       #- name: Pull and run container
       #  run: |
-      #    docker pull ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df
+      #    docker pull ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6d
       #    docker run -d --name guide-my-steps ghcr.io/gcarrenho/guide-my-steps-api:sha-e12c6df
 
       - 
