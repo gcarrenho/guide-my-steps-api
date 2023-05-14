@@ -120,12 +120,12 @@ jobs:
  #      run: |
  #       gcloud compute ssh testvmcontainer-1 --zone=us-central1-a --command="ps -ejH"
 
-#      - 
-#       name: Deploy container to Compute Engine
-#       run: |
-#        gcloud compute instances update-container ${{ steps.assign_instance.outputs.instance }} \
-#          --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest \
-#          --zone us-central1-a
+      - 
+       name: Deploy container to Compute Engine
+       run: |
+        gcloud compute instances update-container ${{ steps.assign_instance.outputs.instance }} \
+          --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest \
+          --zone us-central1-a
 
       
 #          --command "
