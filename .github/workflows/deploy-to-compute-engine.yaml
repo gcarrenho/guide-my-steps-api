@@ -114,22 +114,13 @@ jobs:
          elif [ "${{ github.event_name }}" == "pull_request" ]; then
           echo "::set-output name=instance::testvmcontainer-1"
          fi
-
- #     - 
- #      name: Deploy container to Compute Engine
- #      run: |
- #       gcloud compute ssh testvmcontainer-1 --zone=us-central1-a --command="ps -ejH"
-
+  
       - 
        name: Deploy container to Compute Engine
        run: |
         gcloud compute instances update-container ${{ steps.assign_instance.outputs.instance }} \
           --container-image ghcr.io/gcarrenho/guide-my-steps-api:latest \
           --zone us-central1-a
-
-      
-#          --command "
-#            docker pull ghcr.io/gcarrenho/guide-my-steps-api:latest"
 
 #      - 
 #        name: Despliegue de la imagen en la VM
