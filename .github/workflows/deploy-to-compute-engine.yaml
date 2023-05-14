@@ -33,7 +33,7 @@ jobs:
           type=ref,event=branch
           type=ref,event=pr
           type=semver,pattern={{version}}
-          type=sha
+          type=${{ github.sha }}
          #type=semver,pattern={{major}}.{{minor}}
          #        type=semver,pattern={{major}}
       -
@@ -119,6 +119,6 @@ jobs:
        name: Deploy container to Compute Engine
        run: |
         gcloud compute instances update-container ${{ steps.assign_instance.outputs.instance }} \
-          --container-image ghcr.io/gcarrenho/guide-my-steps-api:sha-81234b7 \
+          --container-image ghcr.io/gcarrenho/guide-my-steps-api:${{ github.sha }} \
           --zone us-central1-a
 
