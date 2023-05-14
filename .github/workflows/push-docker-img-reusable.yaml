@@ -71,15 +71,15 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
-     -
-      uses: 'actions/checkout@v3'
-     -
-      id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        workload_identity_provider: 'projects/98843203215/locations/global/workloadIdentityPools/guide-my-steps-pool/providers/guide-my-steps-provider'
-        service_account: 'terraform@guide-my-steps.iam.gserviceaccount.com'
+#     -
+#      uses: 'actions/checkout@v3'
+#     -
+#      id: 'auth'
+#      name: 'Authenticate to Google Cloud'
+#      uses: 'google-github-actions/auth@v1'
+#      with:
+#        workload_identity_provider: 'projects/98843203215/locations/global/workloadIdentityPools/guide-my-steps-pool/providers/guide-my-steps-provider'
+#        service_account: 'terraform@guide-my-steps.iam.gserviceaccount.com'
 
 #     - 
 #      name: Deploy to CloudRun        
