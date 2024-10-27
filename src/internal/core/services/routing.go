@@ -106,13 +106,13 @@ func builStep(i int, steps []repositories.Steps, translate ports.TranslateRepo, 
 		Duration: models.Duration{
 			Value: steps[i].Duration,
 		},
-		StartLocation: models.LatLng{
-			Latitud:  steps[i].Geometry.Coordinate[0][0],
-			Longitud: steps[i].Geometry.Coordinate[0][1],
+		StartLocation: models.LatLngResponse{
+			Latitud:  steps[i].Geometry.Coordinate[0][1],
+			Longitud: steps[i].Geometry.Coordinate[0][0],
 		},
-		EndLocation: models.LatLng{
-			Latitud:  steps[i].Geometry.Coordinate[len(steps[i].Geometry.Coordinate)-1][0],
-			Longitud: steps[i].Geometry.Coordinate[len(steps[i].Geometry.Coordinate)-1][1],
+		EndLocation: models.LatLngResponse{
+			Latitud:  steps[i].Geometry.Coordinate[len(steps[i].Geometry.Coordinate)-1][1],
+			Longitud: steps[i].Geometry.Coordinate[len(steps[i].Geometry.Coordinate)-1][0],
 		},
 		Intruction:                       translate.Translate(steps[i], modifierType[steps[i].Maneuver.Type+"_instruction"], nextInstruction, user),
 		VerbalTransitionAlertInstruction: translate.Translate(steps[i], modifierType[steps[i].Maneuver.Type+"_alert"], nextInstruction, user),

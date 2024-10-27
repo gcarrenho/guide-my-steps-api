@@ -1,5 +1,6 @@
 package models
 
+/*
 type LatLng struct {
 	Latitud  float64
 	Longitud float64
@@ -20,3 +21,4 @@ func CastToLatLng(coordinate [][]float64) []LatLng {
 func AddLatLng(list *[]LatLng, latLng []LatLng) {
 	*list = append(*list, latLng...)
 }
+*/
