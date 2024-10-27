@@ -91,9 +91,9 @@ func transalation(loc *i18n.Localizer, steps models.Steps, messageID string, nex
 			},
 		})
 	default:
-		if len(steps.Maneuver.Modifier) == 0 {
-			steps.Maneuver.Modifier = pointCardinal(steps.Maneuver.BearingAfter)
-		}
+		//if len(steps.Maneuver.Modifier) == 0 {
+		steps.Maneuver.Modifier = pointCardinal(steps.Maneuver.BearingAfter)
+		//}
 
 		translation = loc.MustLocalize(&i18n.LocalizeConfig{
 			MessageID: messageID,

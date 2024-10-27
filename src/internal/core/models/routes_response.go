@@ -32,18 +32,18 @@ type Distance struct {
 }
 
 type Step struct {
-	StartLocation                    LatLng   `json:"start_location"`
-	EndLocation                      LatLng   `json:"end_location"`
-	Duration                         Duration `json:"duration"`
-	Distance                         Distance `json:"distance"`
-	Intruction                       string   `json:"intruction"`
-	VerbalTransitionAlertInstruction string   `json:"verbal_transition_alert_instruction,omitempty"`
-	VerbalPreTransitionInstruction   string   `json:"verbal_pre_transition_instruction"`
-	VerbalPostTransitionInstruction  string   `json:"verbal_post_transition_instruction"`
-	TravelMode                       string   `json:"travel_mode"`
-	TravelType                       string   `json:"travel_type"`
-	DrivingSide                      string   `json:"driving_side"`
-	StreetName                       string   `json:"street_name"`
+	StartLocation                    LatLngResponse `json:"start_location"`
+	EndLocation                      LatLngResponse `json:"end_location"`
+	Duration                         Duration       `json:"duration"`
+	Distance                         Distance       `json:"distance"`
+	Intruction                       string         `json:"intruction"`
+	VerbalTransitionAlertInstruction string         `json:"verbal_transition_alert_instruction,omitempty"`
+	VerbalPreTransitionInstruction   string         `json:"verbal_pre_transition_instruction"`
+	VerbalPostTransitionInstruction  string         `json:"verbal_post_transition_instruction"`
+	TravelMode                       string         `json:"travel_mode"`
+	TravelType                       string         `json:"travel_type"`
+	DrivingSide                      string         `json:"driving_side"`
+	StreetName                       string         `json:"street_name"`
 }
 
 /*func BuilVerbalPostTransitionInstruction(t string, d float64) string {
@@ -60,3 +60,8 @@ type Step struct {
 
 	return str
 }*/
+
+type LatLngResponse struct {
+	Latitud  float64 `json:"latitude"`
+	Longitud float64 `json:"longitude"`
+}
