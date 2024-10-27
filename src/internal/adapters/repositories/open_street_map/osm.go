@@ -26,10 +26,10 @@ func NewRoutingRepo(baseUrl string) *routingRepo {
 }
 
 // Número máximo de reintentos
-const maxRetries = 3
+//const maxRetries = 3
 
 // Tiempo de espera entre reintentos (usamos exponencial backoff)
-const retryDelay = 2 * time.Second
+//const retryDelay = 2 * time.Second
 
 /*
 func (r *routingRepo) GetRouting(routesRequest models.RoutesRequest) (*osmmodels.OsmResponse, error) {
