@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gcarrenho/guidemysteps/internal/appuser"
 	"github.com/gcarrenho/guidemysteps/internal/translator"
+	"github.com/gcarrenho/guidemysteps/internal/user"
 )
 
 var modifierType = map[string]string{
@@ -132,7 +132,7 @@ func (o *openStreetMapProvider) GetRouting(ctx context.Context, routesRequest Ro
 		return MySteps{}, err
 	}
 
-	mySteps, err := o.convertToMySteps(osmResponse, appuser.User{})
+	mySteps, err := o.convertToMySteps(osmResponse, user.User{})
 	if err != nil {
 		return MySteps{}, err
 	}
@@ -201,7 +201,7 @@ func (o *openStreetMapProvider) fetchOsmResponse(routesRequest RoutesRequest) (O
 	return osmResponse, nil
 }
 
-func (o *openStreetMapProvider) convertToMySteps(osmResponse OsmResponse, user appuser.User) (MySteps, error) {
+func (o *openStreetMapProvider) convertToMySteps(osmResponse OsmResponse, user user.User) (MySteps, error) {
 	mySteps := MySteps{
 		Version: "1.0.0",
 		Status:  osmResponse.Code,
@@ -239,7 +239,7 @@ func (o *openStreetMapProvider) convertToMySteps(osmResponse OsmResponse, user a
 	return mySteps, nil
 }
 
-func builStep(i int, steps []Steps, translate *translator.TranslationService, user appuser.User, nextInstruction string) Step {
+func builStep(i int, steps []Steps, translate *translator.TranslationService, user user.User, nextInstruction string) Step {
 	step := steps[i]
 
 	// Construimos los parámetros para las traducciones usando `buildTransParam`
@@ -278,7 +278,7 @@ func addNewStep(mySteps *MySteps, step Step) {
 	mySteps.Routes[len(mySteps.Routes)-1].Legs[len(mySteps.Routes[len(mySteps.Routes)-1].Legs)-1].Steps = append(mySteps.Routes[len(mySteps.Routes)-1].Legs[len(mySteps.Routes[len(mySteps.Routes)-1].Legs)-1].Steps, step)
 }
 
-func builNextInstruction(i int, steps []Steps, translate *translator.TranslationService, user appuser.User) string {
+func builNextInstruction(i int, steps []Steps, translate *translator.TranslationService, user user.User) string {
 	var nextInstruction string
 	if i != len(steps)-1 {
 		//user.GetLengthStep(distance float64, user User)
@@ -287,7 +287,7 @@ func builNextInstruction(i int, steps []Steps, translate *translator.Translation
 	return nextInstruction
 }
 
-func buildTransParam(step Steps, stepType string, nextInstruction string, user appuser.User) translator.TranslatorStep {
+func buildTransParam(step Steps, stepType string, nextInstruction string, user user.User) translator.TranslatorStep {
 	return translator.TranslatorStep{
 		StepType:        stepType,
 		Name:            step.Name,

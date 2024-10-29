@@ -1,8 +1,8 @@
 package services
 
 import (
-	"github.com/gcarrenho/guidemysteps/src/internal/core/models"
-	"github.com/gcarrenho/guidemysteps/src/internal/core/ports"
+	"github.com/gcarrenho/guidemysteps/src/internals/core/models"
+	"github.com/gcarrenho/guidemysteps/src/internals/core/ports"
 )
 
 type userSvc struct {

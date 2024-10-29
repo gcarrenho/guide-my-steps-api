@@ -3,7 +3,7 @@ package repository
 import (
 	"database/sql"
 
-	"github.com/gcarrenho/guidemysteps/src/internal/core/models"
+	"github.com/gcarrenho/guidemysteps/src/internals/core/models"
 )
 
 type userRepository struct {

@@ -6,8 +6,8 @@ import (
 	"log"
 	"net"
 
-	"github.com/gcarrenho/guidemysteps/internal/ctrgrpc"
 	"github.com/gcarrenho/guidemysteps/internal/routing"
+	"github.com/gcarrenho/guidemysteps/internal/routing/routinggrpc"
 	"github.com/gcarrenho/guidemysteps/internal/translator"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"golang.org/x/text/language"
@@ -45,7 +45,7 @@ func main() {
 		opts = append(opts, grpc.Creds(creds))
 	}
 
-	gRPCServer, err := ctrgrpc.NewGRPCServer(&ctrgrpc.Config{FeatureSvc: routingSvc}, opts...)
+	gRPCServer, err := routinggrpc.NewGRPCServer(&routinggrpc.Config{FeatureSvc: routingSvc}, opts...)
 	if err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}

@@ -1,7 +1,7 @@
 FROM golang:alpine AS build
 WORKDIR $GOPATH/src
 COPY . .
-RUN go build -o guide-my-steps src/cmd/main.go
+RUN go build -o guide-my-steps cmd/web/main.go
 
 
 # Building image with the binary

@@ -1,8 +1,7 @@
-package ctrgrpc
+package routinggrpc
 
 import (
 	"context"
-	"sync"
 
 	api "github.com/gcarrenho/guidemysteps/api/v1/mysteps"
 
@@ -14,7 +13,6 @@ var _ api.MyStepsServer = (*GRPCServer)(nil)
 
 type Config struct {
 	FeatureSvc routing.RoutingComponent
-	//mu         sync.Mutex
 }
 
 type GRPCServer struct {
@@ -60,14 +58,15 @@ func (s *GRPCServer) GetRoute(ctx context.Context, request *api.MyStepsRequest) 
 		UserEmail:   request.UserEmail,
 	}
 
-	route, err := s.Config.FeatureSvc.GetRouting(ctx, routesModel)
+	mySteps, err := s.Config.FeatureSvc.GetRouting(ctx, routesModel)
 	if err != nil {
 		return nil, err
 	}
 
-	return convertToProtoResponse2(route), nil
+	return mySteps.ConvertToProtoResponse(), nil
 }
 
+/*
 func convertToProtoResponse(mySteps routing.MySteps) *api.MyStepsResponse {
 	// Crear y mapear la lista de rutas (Routes)
 	routesProto := make([]*api.Route, len(mySteps.Routes))
@@ -147,79 +146,7 @@ func convertDistanceToProto(distance routing.Distance) *api.Distance {
 		Value: distance.Value,
 		Text:  distance.Text,
 	}
-}
+}*/
 
 /*=======================================================================================================================================*/
 /*SECOND VERSION WITH GORUTINES*/
-
-func convertToProtoResponse2(mySteps routing.MySteps) *api.MyStepsResponse {
-	routesProto := make([]*api.Route, len(mySteps.Routes))
-	var wg sync.WaitGroup
-	wg.Add(len(mySteps.Routes))
-
-	for i, r := range mySteps.Routes {
-		go func(i int, r routing.Route) {
-			defer wg.Done()
-			routesProto[i] = convertRouteToProto(r)
-		}(i, r)
-	}
-
-	wg.Wait()
-
-	return &api.MyStepsResponse{
-		//Version:   mySteps.Version,
-		Status:    mySteps.Status,
-		Routes:    routesProto,
-		Units:     mySteps.Units,
-		Waypoints: mySteps.Waypoints,
-		Language:  mySteps.Language,
-	}
-}
-
-func convertRouteToProto(route routing.Route) *api.Route {
-	legsProto := make([]*api.Leg, len(route.Legs))
-	for j, l := range route.Legs {
-		legsProto[j] = convertLegToProto(l)
-	}
-
-	polyPointsProto := make([]*api.LatLng, len(route.Polypoints))
-	for m, p := range route.Polypoints {
-		polyPointsProto[m] = convertLatLngToProto(p)
-	}
-
-	return &api.Route{
-		Legs:       legsProto,
-		Polypoints: polyPointsProto,
-		Duration:   convertDurationToProto(route.Duration),
-		Distance:   convertDistanceToProto(route.Distance),
-	}
-}
-
-func convertLegToProto(leg routing.Leg) *api.Leg {
-	stepsProto := make([]*api.Step, len(leg.Steps))
-	for i, step := range leg.Steps {
-		stepsProto[i] = convertStepToProto(step)
-	}
-
-	return &api.Leg{
-		Steps:   stepsProto,
-		Summary: leg.Summary,
-	}
-}
-
-func convertStepToProto(step routing.Step) *api.Step {
-	return &api.Step{
-		StartLocation:                    convertLatLngToProto(routing.LatLng(step.StartLocation)),
-		EndLocation:                      convertLatLngToProto(routing.LatLng(step.EndLocation)),
-		Duration:                         convertDurationToProto(step.Duration),
-		Distance:                         convertDistanceToProto(step.Distance),
-		Intruction:                       step.Intruction,
-		VerbalTransitionAlertInstruction: step.VerbalTransitionAlertInstruction,
-		VerbalPreTransitionInstruction:   step.VerbalPreTransitionInstruction,
-		VerbalPostTransitionInstruction:  step.VerbalPostTransitionInstruction,
-		TravelMode:                       step.TravelMode,
-		TravelType:                       step.TravelType,
-		DrivingSide:                      step.DrivingSide,
-		StreetName:                       step.StreetName,
-	}
-}
