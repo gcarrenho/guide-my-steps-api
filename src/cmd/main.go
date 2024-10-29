@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"project/guidemysteps/src/internal/adapters/handlers"
-	osmrepository "project/guidemysteps/src/internal/adapters/repositories/open_street_map"
-	postgresql "project/guidemysteps/src/internal/adapters/repositories/postgresql"
-	"project/guidemysteps/src/internal/core/services"
 
-	i18nRepo "project/guidemysteps/src/internal/adapters/repositories/i18"
+	"github.com/gcarrenho/guidemysteps/src/internal/adapters/handlers"
+	osmrepository "github.com/gcarrenho/guidemysteps/src/internal/adapters/repositories/open_street_map"
+	postgresql "github.com/gcarrenho/guidemysteps/src/internal/adapters/repositories/postgresql"
+	"github.com/gcarrenho/guidemysteps/src/internal/core/services"
+
+	i18nRepo "github.com/gcarrenho/guidemysteps/src/internal/adapters/repositories/i18"
 
 	"github.com/gin-gonic/gin"
 	"github.com/nicksnyder/go-i18n/v2/i18n"

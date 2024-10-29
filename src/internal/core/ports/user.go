@@ -1,6 +1,6 @@
 package ports
 
-import "project/guidemysteps/src/internal/core/models"
+import "github.com/gcarrenho/guidemysteps/src/internal/core/models"
 
 type UserSvc interface {
 	Get(email string) (*models.User, error)

@@ -1,8 +1,8 @@
 package ports
 
 import (
-	osmmodels "project/guidemysteps/src/internal/adapters/repositories/open_street_map/models"
-	"project/guidemysteps/src/internal/core/models"
+	osmmodels "github.com/gcarrenho/guidemysteps/src/internal/adapters/repositories/open_street_map/models"
+	"github.com/gcarrenho/guidemysteps/src/internal/core/models"
 )
 
 type RoutingSvc interface {

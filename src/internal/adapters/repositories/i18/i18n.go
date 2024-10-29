@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"strings"
 
-	models "project/guidemysteps/src/internal/adapters/repositories/open_street_map/models"
+	models "github.com/gcarrenho/guidemysteps/src/internal/adapters/repositories/open_street_map/models"
 
-	usermodel "project/guidemysteps/src/internal/core/models"
+	usermodel "github.com/gcarrenho/guidemysteps/src/internal/core/models"
 
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 )

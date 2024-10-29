@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"project/guidemysteps/src/internal/core/models"
-	"project/guidemysteps/src/internal/core/ports"
+
+	"github.com/gcarrenho/guidemysteps/src/internal/core/models"
+	"github.com/gcarrenho/guidemysteps/src/internal/core/ports"
 
 	"github.com/gin-gonic/gin"
 )

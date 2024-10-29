@@ -2,7 +2,8 @@ package repository
 
 import (
 	"database/sql"
-	"project/guidemysteps/src/internal/core/models"
+
+	"github.com/gcarrenho/guidemysteps/src/internal/core/models"
 )
 
 type userRepository struct {

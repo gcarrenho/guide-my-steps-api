@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package user.v1;
+
+option go_package = "github.com/gcarrenho/api/user_v1";
+
+message User {
+  int64 id = 1;                       // Identificador único
+  string name = 2;                     // Nombre
+  string last_name = 3;                // Apellido
+  string user_name = 4;                // Nombre de usuario
+  string gender = 5;                   // Género
+  Phone phone = 6;                     // Información del teléfono
+  double height = 7;                   // Altura para el cálculo del paso (p. ej., 170 cm)
+  Address address = 8;                 // Dirección
+  repeated Place favorite_places = 9;  // Lista de lugares favoritos
+  Config config = 10;                  // Configuración de usuario
+}
+
+// Configuración del usuario
+message Config {
+  string theme = 1;                // Tema
+  string unit = 2;                 // Unidad de medida
+  string language = 3;             // Idioma (es-ES, en-US, en-GB, fr-FR, it-IT, de-DE)
+}
+
+// Información del teléfono
+message Phone {
+  string number = 1;               // Número de teléfono
+  string country_code = 2;         // Código de país (ej. +1 para EE.UU.)
+}
+
+// Dirección del usuario
+message Address {
+  string street = 1;               // Calle
+  string city = 2;                 // Ciudad
+  string state = 3;                // Estado
+  string zip_code = 4;             // Código postal
+  string country = 5;              // País
+}
+
+// Lugar favorito del usuario
+message Place {
+  string name = 1;                 // Nombre del lugar
+  string location = 2;             // Ubicación (puede ser una dirección o coordenadas)
+  string category = 3;             // Categoría del lugar
+}

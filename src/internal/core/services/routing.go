@@ -1,9 +1,9 @@
 package services
 
 import (
-	repositories "project/guidemysteps/src/internal/adapters/repositories/open_street_map/models"
-	"project/guidemysteps/src/internal/core/models"
-	"project/guidemysteps/src/internal/core/ports"
+	repositories "github.com/gcarrenho/guidemysteps/src/internal/adapters/repositories/open_street_map/models"
+	"github.com/gcarrenho/guidemysteps/src/internal/core/models"
+	"github.com/gcarrenho/guidemysteps/src/internal/core/ports"
 )
 
 const (

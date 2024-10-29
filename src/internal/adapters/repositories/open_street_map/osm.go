@@ -6,9 +6,10 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	osmmodels "project/guidemysteps/src/internal/adapters/repositories/open_street_map/models"
-	"project/guidemysteps/src/internal/core/models"
 	"time"
+
+	osmmodels "github.com/gcarrenho/guidemysteps/src/internal/adapters/repositories/open_street_map/models"
+	"github.com/gcarrenho/guidemysteps/src/internal/core/models"
 )
 
 type routingRepo struct {
