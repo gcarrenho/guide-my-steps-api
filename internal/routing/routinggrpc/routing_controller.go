@@ -4,6 +4,8 @@ import (
 	"context"
 
 	api "github.com/gcarrenho/guidemysteps/api/v1/mysteps"
+	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
+	"go.uber.org/zap"
 
 	"github.com/gcarrenho/guidemysteps/internal/routing"
 	"google.golang.org/grpc"
@@ -32,6 +34,7 @@ func NewGRPCServer(config *Config, grpcOpts ...grpc.ServerOption) (
 	*grpc.Server,
 	error,
 ) {
+
 	gsrv := grpc.NewServer(grpcOpts...) // Create the server gRPC with grpcOpts
 
 	srv, err := newGRPCServer(config) // Create an instance of gRPC server with config
@@ -44,6 +47,8 @@ func NewGRPCServer(config *Config, grpcOpts ...grpc.ServerOption) (
 }
 
 func (s *GRPCServer) GetRoute(ctx context.Context, request *api.MyStepsRequest) (*api.MyStepsResponse, error) {
+	logger := grpc_zap.Extract(ctx)
+
 	routesModel := routing.RoutesRequest{
 		Start: routing.LatLng{
 			Latitud:  request.Start.Latitude,
@@ -60,6 +65,7 @@ func (s *GRPCServer) GetRoute(ctx context.Context, request *api.MyStepsRequest) 
 
 	mySteps, err := s.Config.FeatureSvc.GetRouting(ctx, routesModel)
 	if err != nil {
+		logger.Error("Failed to get routing", zap.Error(err))
 		return nil, err
 	}
 

@@ -116,7 +116,7 @@ type openStreetMapProvider struct {
 	translate *translator.TranslationService
 }
 
-func NewRoutingRepo(baseUrl string, translate *translator.TranslationService) *openStreetMapProvider {
+func NewOpenStreetMapProvider(baseUrl string, translate *translator.TranslationService) *openStreetMapProvider {
 	return &openStreetMapProvider{
 		cli: &http.Client{
 			Timeout: time.Second * 60,
@@ -157,7 +157,6 @@ func (o *openStreetMapProvider) fetchOsmResponse(routesRequest RoutesRequest) (O
 
 	var resp *http.Response
 	var err error
-	fmt.Println(url)
 	// Implementar un bucle de reintentos en caso de fallo
 	for i := 0; i < maxRetries; i++ {
 		resp, err = o.cli.Get(url)
@@ -165,20 +164,20 @@ func (o *openStreetMapProvider) fetchOsmResponse(routesRequest RoutesRequest) (O
 		if err != nil {
 			if errors.Is(err, io.EOF) {
 				// Mostramos el error y esperamos antes de volver a intentar
-				fmt.Printf("Intento %d fallido, reintentando... Error: %v\n", i, err)
+				//fmt.Printf("Intento %d fallido, reintentando... Error: %v\n", i, err)
 				// Si se trata de un error de EOF, espera y reintenta
 				time.Sleep(retryDelay)
 				continue
 			}
 			return OsmResponse{}, err // Otros errores se devuelven directamente
 		}
-		if resp.StatusCode == 500 {
+		if resp.StatusCode == http.StatusInternalServerError {
 			fmt.Printf("Intento %d fallido, reintentando... Error: %v\n", i, err)
 
 			time.Sleep(retryDelay)
 			continue
 		}
-		fmt.Println("exito ", resp)
+		//fmt.Println("exito ", resp)
 		break // Si la solicitud es exitosa, sale del bucle
 	}
 
@@ -190,12 +189,12 @@ func (o *openStreetMapProvider) fetchOsmResponse(routesRequest RoutesRequest) (O
 
 	respBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return OsmResponse{}, err
+		return OsmResponse{}, fmt.Errorf("reading open street map response: %w", err)
 	}
 
 	err = json.Unmarshal(respBytes, &osmResponse)
 	if err != nil {
-		return OsmResponse{}, fmt.Errorf("error deserializando la respuesta: %w", err)
+		return OsmResponse{}, fmt.Errorf("unmarshaling open street map response: %w", err)
 	}
 
 	return osmResponse, nil
