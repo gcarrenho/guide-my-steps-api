@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package mysteps.v1;
+
+option go_package = "github.com/gcarrenho/api/mysteps_v1";
+
+service MySteps{
+	// Obtains the feature at a given position.
+	//GetRouting(routesRequest models.RoutesRequest, user models.User) (*models.MySteps, error)
+
+	rpc GetRoute(MyStepsRequest) returns (MyStepsResponse) {}
+
+}
+
+message MyStepsRequest {
+	LatLng start = 1;
+	LatLng destination = 2;
+	string driving_mode = 3;
+	string language = 4;
+	string user_email = 5;
+}
+
+message MyStepsResponse {
+	string status = 1;
+	repeated Route routes = 2;
+	string units = 3;
+	string waypoints = 4;
+	string language = 5;
+}
+
+message Route {
+	repeated Leg legs = 1;
+	repeated LatLng  polypoints = 2;
+	Duration duration = 3;
+	Distance distance = 4;
+}
+
+message Leg {
+	repeated Step steps = 1;
+	string  summary = 2;
+}
+
+message Duration {
+	double value = 1;
+	string text = 2;
+}
+
+message Distance {
+	double value = 1;
+	string  text = 2;
+}
+
+message Step {
+	LatLng start_location = 1;
+	LatLng  end_location = 2;
+	Duration  duration = 3;
+	Distance  distance = 4;
+	string  intruction = 5;
+	string  verbal_transition_alert_instruction = 6;
+	string  verbal_pre_transition_instruction = 7;
+	string  verbal_post_transition_instruction = 8;
+	string  travel_mode = 9;
+	string  travel_type = 10;
+	string  driving_side = 11;
+	string  street_name = 12;
+}
+
+
+message LatLng {
+	double latitude = 1;
+	double longitude = 2;
+}
